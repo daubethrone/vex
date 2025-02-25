@@ -2,6 +2,7 @@
   "dependencies": {
     "bootstrap": "5.3.3",
     "flask": "^0.2.10",
+    "tailwind": "^4.0.0",
     "virtualenv": "^0.3.1"
   }
 }
