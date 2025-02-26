@@ -23,3 +23,6 @@ def random_flag(date=date, flag=flag, country=country, summary=summary, wikipedi
 @app.route('/new') #New CSS-styled route
 def random_flag_two(date=date, flag=flag, country=country, summary=summary, wikipedia=wikipedia) :
     return render_template('new.html', date=date, flag=flag, country=country, summary=summary, wikipedia=wikipedia)
+
+if __name__ == '__main__' :
+    app.run(host='0.0.0.0', port='5001', debug=True)

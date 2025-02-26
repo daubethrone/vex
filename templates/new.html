@@ -1,84 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="retro">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vex</title>
+  <title>Vex: {{country}}</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Adding cute Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            pastel: {
-              purple: '#E7D6FF',
-              lightpurple: '#F3EBFF'
-            }
-          },
-          fontFamily: {
-            'baloo': ['"Baloo 2"', 'cursive'],
-            'comic': ['"Comic Neue"', 'cursive']
-          }
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #F3EBFF;
-      font-family: 'Comic Neue', cursive;
+      font-family: 'Quicksand', sans-serif;
     }
-    h1, h2, h3, .btn {
-      font-family: 'Baloo 2', cursive;
-    }
-    .floating {
-      animation: float 3s ease-in-out infinite;
-    }
+    
     @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+    
+    .floating-flag {
+      animation: float 3s ease-in-out infinite;
     }
   </style>
 </head>
-<body>
-  <div class="min-h-screen flex flex-col items-center pt-24 relative">
-    <!-- Floating Round Banner -->
-    <div class="absolute top-6 floating">
-      <div class="rounded-full bg-pastel-purple shadow-lg p-6 w-64 h-64 flex items-center justify-center">
-        <h1 class="text-3xl font-bold text-black text-center leading-tight">Vex</h1>
-      </div>
+<body class="min-h-screen flex items-center justify-center bg-base-200">
+  <div class="text-center px-4">
+    <div class="mb-8">
+      <img 
+        src="{{flag}}" 
+        alt="Flag" 
+        class="floating-flag mx-auto w-48 h-auto rounded-lg shadow-lg"
+      >
     </div>
-
-    <!-- Main Content -->
-    <main class="flex-grow flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto mt-16">
-      <!-- Central Image Card -->
-      <div class="card w-full bg-white shadow-lg mb-8">
-        <figure class="px-4 pt-4">
-          <img src={{flag}} class="rounded-lg object-cover w-full h-64" />
-        </figure>
-        <div class="card-body bg-pastel-purple">
-          <h2 class="card-title text-black text-center mx-auto text-2xl">{{country}}</h2>
-          <p class="text-black text-center text-lg">Used since {{date}}</p>
-        </div>
-      </div>
-
-      <!-- Simple Text Section -->
-      <div class="text-center mb-8 p-6 bg-white rounded-lg shadow-md w-full">
-        <p class="text-black text-lg">{{summary}}</p>
-      </div>
-
-
-
-    <!-- Simple Footer -->
-    <footer class="w-full bg-pastel-purple p-4 text-center">
-      <p class="text-black">Dev env</p>
-    </footer>
+    
+    <h1 class="text-4xl font-bold mb-4 text-primary">{{country}}</h1>
+    
+    <p class="text-lg max-w-md mx-auto text-base-content opacity-80">
+      {{summary}}
+    </p>
   </div>
 </body>
 </html>
