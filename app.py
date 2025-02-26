@@ -16,13 +16,9 @@ wikipedia = data[num]["Flag Page Link"]
 summary = data[num]["Flag Description"]
 #check how to implement summary and wikipedia link
 
-@app.route('/') #Original route, html only
+@app.route('/') # Home
 def random_flag(date=date, flag=flag, country=country, summary=summary, wikipedia=wikipedia) :
-    return render_template('mainpage.html', date=date, flag=flag, country=country, summary=summary, wikipedia=wikipedia)
-
-@app.route('/new') #New CSS-styled route
-def random_flag_two(date=date, flag=flag, country=country, summary=summary, wikipedia=wikipedia) :
-    return render_template('new.html', date=date, flag=flag, country=country, summary=summary, wikipedia=wikipedia)
+    return render_template('homepage.html', date=date, flag=flag, country=country, summary=summary, wikipedia=wikipedia)
 
 if __name__ == '__main__' :
     app.run(host='0.0.0.0', port='5001', debug=True)
