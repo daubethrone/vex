@@ -13,7 +13,7 @@
     "Country Name": "Afghanistan (Islamic Republic)",
     "Flag Ratio": "2∶3",
     "Adoption Date": "August 19, 2013",
-    "Flag Description": "Three equal vertical bands of black (hoist side), red, and green, with the national emblem[c] in white centered on the red band and slightly overlapping the other 2 bands.",
+    "Flag Description": "Three equal vertical bands of black (hoist side), red, and green, with the national emblem in white centered on the red band and slightly overlapping the other 2 bands.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Flag_of_Afghanistan_%282013%E2%80%932021%29.svg/220px-Flag_of_Afghanistan_%282013%E2%80%932021%29.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_the_Islamic_Republic_of_Afghanistan"
   },
@@ -103,7 +103,7 @@
     "Country Name": "State flag of Austria",
     "Flag Ratio": "—",
     "Adoption Date": "Three equal horizontal bands of red (top), white, and red with the coat of arms of Austria in the center.",
-    "Flag Description": "",
+    "Flag Description": "A horizontal triband of red (top and bottom) and white.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Flag_of_Austria_%28state%29.svg/220px-Flag_of_Austria_%28state%29.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Austria"
   },
@@ -210,8 +210,8 @@
     "Position": "24",
     "Country Name": "State flag of Bolivia",
     "Flag Ratio": "—",
-    "Adoption Date": "Three equal horizontal bands of red (top), yellow, and green with the coat of arms centered on the yellow band.",
-    "Flag Description": "",
+    "Adoption Date": "October 31, 1851",
+    "Flag Description": "Three equal horizontal bands of red (top), yellow, and green with the coat of arms centered on the yellow band.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Bandera_de_Bolivia_%28Estado%29.svg/220px-Bandera_de_Bolivia_%28Estado%29.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Bolivia"
   },
@@ -219,8 +219,8 @@
     "Position": "25",
     "Country Name": "Wiphala",
     "Flag Ratio": "1∶1",
-    "Adoption Date": "Germán Choquehuanca",
-    "Flag Description": "",
+    "Adoption Date": "August 5, 2009",
+    "Flag Description": "7x7 square patchwork of seven colors",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Banner_of_the_Qulla_Suyu_%281979%29.svg/220px-Banner_of_the_Qulla_Suyu_%281979%29.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Wiphala"
   },
@@ -405,15 +405,6 @@
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Costa_Rica"
   },
   {
-    "Position": "46",
-    "Country Name": "State flag of Costa Rica",
-    "Flag Ratio": "May 5, 1998",
-    "Adoption Date": "—",
-    "Flag Description": "",
-    "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Costa_Rica_%28state%29.svg/220px-Flag_of_Costa_Rica_%28state%29.svg.png",
-    "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Costa_Rica"
-  },
-  {
     "Position": "47",
     "Country Name": "Croatia",
     "Flag Ratio": "1:2",
@@ -525,7 +516,7 @@
     "Position": "59",
     "Country Name": "Eritrea",
     "Flag Ratio": "1:2",
-    "Adoption Date": "1995",
+    "Adoption Date": "December 5, 1995",
     "Flag Description": "Red isosceles triangle (based on the hoist side) dividing the flag into two right triangles; the upper triangle is green, the lower one is blue; a gold wreath encircling a gold olive branch is centered on the hoist side of the red triangle.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Flag_of_Eritrea.svg/220px-Flag_of_Eritrea.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Eritrea"
@@ -804,7 +795,7 @@
     "Position": "90",
     "Country Name": "Jordan",
     "Flag Ratio": "1:2",
-    "Adoption Date": "April 16, 1928[p]",
+    "Adoption Date": "April 16, 1928",
     "Flag Description": "Three equal horizontal bands of black (top), white, and green; a red isosceles triangle on the hoist side, and bearing a small white seven-pointed star.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Flag_of_Jordan.svg/220px-Flag_of_Jordan.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Jordan"
@@ -1020,7 +1011,7 @@
     "Position": "114",
     "Country Name": "Mexico",
     "Flag Ratio": "4:7",
-    "Adoption Date": "1968",
+    "Adoption Date": "September 16, 1968",
     "Flag Description": "Three equal vertical bands of green (hoist side), white, and red; Mexico's coat of arms (an eagle with a snake in its beak perched on a cactus) is centered in the white band.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/220px-Flag_of_Mexico.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Mexico"
@@ -1118,7 +1109,7 @@
   {
     "Position": "125",
     "Country Name": "Nepal",
-    "Flag Ratio": "See Flag of Nepal § Aspect ratio",
+    "Flag Ratio": "-",
     "Adoption Date": "December 16, 1962",
     "Flag Description": "Crimson red with a blue border around the unique shape of two overlapping right triangles; the smaller, upper triangle bears a white stylized moon and the larger, lower triangle displays a white 12-pointed sun.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Nepal.svg/220px-Flag_of_Nepal.svg.png",
@@ -1263,27 +1254,18 @@
     "Position": "141",
     "Country Name": "Paraguay",
     "Flag Ratio": "—",
-    "Adoption Date": "",
-    "Flag Description": "",
+    "Adoption Date": "July 15, 2013 (new version)",
+    "Flag Description": "A horizontal triband of red, white and blue, defaced on the obverse with the coat of arms of Paraguay.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Flag_of_Paraguay_%28reverse%29.svg/220px-Flag_of_Paraguay_%28reverse%29.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Paraguay"
   },
   {
     "Position": "142",
-    "Country Name": "Civil flag of Peru",
+    "Country Name": "Peru (Civil Flag)",
     "Flag Ratio": "2:3",
     "Adoption Date": "February 25, 1825",
     "Flag Description": "Three equal, vertical bands of red (hoist side), white, and red.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Peru.svg/220px-Flag_of_Peru.svg.png",
-    "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Peru"
-  },
-  {
-    "Position": "143",
-    "Country Name": "State flag of Peru",
-    "Flag Ratio": "Three equal, vertical bands of red (hoist side), white, and red with the coat of arms centered in the white band.",
-    "Adoption Date": "",
-    "Flag Description": "",
-    "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Flag_of_Peru_%28state%29.svg/220px-Flag_of_Peru_%28state%29.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Peru"
   },
   {
@@ -1488,7 +1470,7 @@
     "Position": "166",
     "Country Name": "South Korea",
     "Flag Ratio": "2:3",
-    "Adoption Date": "October 1997",
+    "Adoption Date": "July 12, 1948",
     "Flag Description": "White with a red (top) and blue taijitu in the center; there is a different black trigram from the I Ching in each corner of the white field.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/220px-Flag_of_South_Korea.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_South_Korea"
@@ -1515,7 +1497,7 @@
     "Position": "169",
     "Country Name": "Sri Lanka",
     "Flag Ratio": "1:2",
-    "Adoption Date": "1978",
+    "Adoption Date": "May 22, 1972",
     "Flag Description": "Yellow with two panels; the smaller hoist-side panel has two equal vertical bands of green (hoist side) and orange; the other larger panel depicts a yellow lion holding a sword on a maroon rectangular field that also displays a yellow bo leaf in each corner; the yellow field appears as a border around the entire flag and extends between the two panels.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flag_of_Sri_Lanka.svg/220px-Flag_of_Sri_Lanka.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Sri_Lanka"
@@ -1560,16 +1542,16 @@
     "Position": "174",
     "Country Name": "Syria (revolution)",
     "Flag Ratio": "2:3",
-    "Adoption Date": "December 2024",
+    "Adoption Date": "December 8, 2024",
     "Flag Description": "Three equal horizontal bands of green, white, and black; three small, red, five-pointed stars in a horizontal line centered in the white band.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Flag_of_the_Syrian_revolution.svg/220px-Flag_of_the_Syrian_revolution.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Syria"
   },
   {
     "Position": "175",
-    "Country Name": "Syria (Ba'athist)",
+    "Country Name": "Syria (until 2024)",
     "Flag Ratio": "2:3",
-    "Adoption Date": "March 30, 1980[aa]",
+    "Adoption Date": "March 30, 1980",
     "Flag Description": "Three equal horizontal bands of red, white, and black; two small, green, five-pointed stars in a horizontal line centered in the white band.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Flag_of_the_United_Arab_Republic_%281958%E2%80%931971%29%2C_Flag_of_Syria_%281980%E2%80%932024%29.svg/220px-Flag_of_the_United_Arab_Republic_%281958%E2%80%931971%29%2C_Flag_of_Syria_%281980%E2%80%932024%29.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Syria#United_Arab_Republic_and_Ba'athist_Syria"
@@ -1767,8 +1749,8 @@
     "Position": "197",
     "Country Name": "State flag of Venezuela",
     "Flag Ratio": "—",
-    "Adoption Date": "Three equal horizontal bands of yellow (top), blue, and red with the coat of arms on the hoist side of the yellow band and an arc of eight white five-pointed stars centered in the blue band.",
-    "Flag Description": "",
+    "Adoption Date": "March 12, 1896",
+    "Flag Description": "Three equal horizontal bands of yellow (top), blue, and red with the coat of arms on the hoist side of the yellow band and an arc of eight white five-pointed stars centered in the blue band.",
     "Flag Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Flag_of_Venezuela_%28state%29.svg/220px-Flag_of_Venezuela_%28state%29.svg.png",
     "Flag Page Link": "https://en.wikipedia.org/wiki/Flag_of_Venezuela"
   },
