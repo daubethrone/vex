@@ -30,9 +30,6 @@ for numb, item in enumerate(data):
         item["Flag Description"]
     ))
 
-
-
-
 @app.route('/') # Home
 def pick_flag() :
     picked_flag = random.choice(flag_list)
@@ -57,6 +54,16 @@ def skyblog() :
         pwikipedia_sk = picked_flag_sk.wikipedia
         return render_template('skyblog.html', date=pdate_sk, flag=pflag_sk, country=pcountry_sk, summary=psummary_sk, wikipedia=pwikipedia_sk, usr=usr)
 
-
-if __name__ == '__main__' :
-    app.run(host='0.0.0.0', port=5001, debug=True)
+# Quiz
+@app.route('/quizz')
+def select_four() :
+    temp_lst = flag_list.copy()
+    options = []
+    random.shuffle(temp_lst)
+    for i in range(4) :
+        options.append(random.choice(temp_lst))
+    opt1 = options[0]
+    opt2 = options[1]
+    opt3 = options[2]
+    opt4 = options[3]
+    return render_template('quizz.html', opt1=opt1.country, opt2=opt2.country, opt3=opt3.country, opt4=opt4.country, corr_flag=opt1.flag)
