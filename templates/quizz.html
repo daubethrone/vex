@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="retro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Question</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+    }
+    
+    .light-purple {
+      color: #8A2BE2; /* Lighter Purple */
+    }
+    
+    .anthracite {
+      color: #2C3539; /* Anthracite */
+    }
+    
+    .btn-light-purple {
+      background-color: #8A2BE2 !important; /* Lighter Purple */
+      border-color: #8A2BE2 !important;
+      color: white !important;
+    }
+    
+    .btn-light-purple:hover {
+      background-color: #7B1FA2 !important; /* Slightly darker on hover */
+    }
+
+    .home-button {
+      position: fixed;
+      left: 20px;
+      top: 20px;
+      z-index: 20;
+      background-color: transparent;
+      color: #2C3539;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .home-button:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Option button styles */
+    .option-btn {
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+      text-align: left;
+      justify-content: flex-start;
+      height: auto;
+      min-height: 3rem;
+      padding: 0.75rem 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .option-btn:hover {
+      border-color: #8A2BE2;
+      transform: translateY(-2px);
+    }
+    
+    .option-btn.selected {
+      background-color: #8A2BE2;
+      color: white;
+    }
+    
+    .option-btn.correct {
+      background-color: #4CAF50; /* Green for correct answers */
+      color: white;
+      border-color: #4CAF50;
+    }
+    
+    .option-btn.incorrect {
+      background-color: #F44336;
+      color: white;
+      border-color: #F44336;
+    }
+
+    .option-btn.neutral {
+      background-color: #555555; /* Neutral gray for incorrect answers */
+      color: white;
+      border-color: #555555;
+    }
+
+    .question-image {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      max-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .question-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: rgba(138, 43, 226, 0.2);
+      color: #8A2BE2;
+      font-weight: bold;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .option-btn.selected .option-letter,
+    .option-btn.correct .option-letter,
+    .option-btn.incorrect .option-letter,
+    .option-btn.neutral .option-letter {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+    
+    /* Animation for options */
+    .options-container {
+      transition: all 0.5s ease;
+    }
+    
+    .feedback-message {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .feedback-message.visible {
+      opacity: 1;
+    }
+    
+    .feedback-icon {
+      margin-left: 8px;
+    }
+    
+    @keyframes pulseGreen {
+      0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); /* Green pulse */
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+      }
+    }
+    
+    @keyframes pulseGray {
+      0% {
+        box-shadow: 0 0 0 0 rgba(85, 85, 85, 0.7); /* Gray pulse */
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(85, 85, 85, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(85, 85, 85, 0);
+      }
+    }
+    
+    .pulse-green {
+      animation: pulseGreen 2s infinite;
+    }
+    
+    .pulse-gray {
+      animation: pulseGray 2s infinite;
+    }
+    
+    /* Next question button */
+    .next-question-btn {
+      margin-top: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+      display: none;
+    }
+    
+    .next-question-btn.visible {
+      opacity: 1;
+      transform: translateY(0);
+      display: block;
+    }
+    
+    /* Checkmark and X icons */
+    .checkmark {
+      color: #4CAF50;
+      margin-left: 8px;
+    }
+    
+    .x-mark {
+      color: #555555;
+      margin-left: 8px;
+    }
+    
+    /* Disable pointer events after selection */
+    .option-btn.disabled {
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex bg-base-200 relative">
+  <!-- Home Button -->
+  <a href="/" class="home-button">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </a>
+
+  <!-- Main Content -->
+  <div class="w-full flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-2xl px-4 py-8">
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 light-purple text-center">Quiz Question</h1>
+      
+      <!-- Card example -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <!-- Question Image -->
+          <div class="question-image">
+            <img id="question-image" src="https://picsum.photos/id/237/800/400" alt="Question Image">
+          </div>
+          
+          <h2 id="question-text" class="text-xl font-semibold mb-4 text-center">Select the correct answer:</h2>
+          
+          <!-- 4 Propositions -->
+          <div id="options-container" class="options-container flex flex-col gap-3 mb-6">
+            <!-- Options will be populated by JavaScript -->
+          </div>
+          
+          <!-- Next Question Button (initially hidden) -->
+          <div class="flex justify-center">
+            <button id="next-question-btn" class="next-question-btn btn btn-light-purple" onclick="loadNewQuestion()">
+              One more !
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Quiz question variables
+    let questionText = "What is this flag ?";
+    let questionImageUrl = "{{corr_flag}}";
+    
+    // Proposition variables
+    let correctAnswer = "{{opt1}}";
+    let incorrectAnswer1 = "{{opt2}}";
+    let incorrectAnswer2 = "{{opt3}}";
+    let incorrectAnswer3 = "{{opt4}}";
+    
+    // Function to shuffle an array (Fisher-Yates algorithm)
+    function shuffleArray(array) {
+      const shuffled = [...array]; // Create a copy to avoid modifying the original
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+    
+    // Function to create an option button
+    function createOptionButton(letter, text, isCorrect) {
+      const button = document.createElement('button');
+      button.className = 'option-btn btn btn-outline w-full';
+      button.setAttribute('data-correct', isCorrect);
+      button.onclick = function() { selectAnswer(this); };
+      
+      const letterSpan = document.createElement('span');
+      letterSpan.className = 'option-letter';
+      letterSpan.textContent = letter;
+      
+      const textSpan = document.createElement('span');
+      textSpan.textContent = text;
+      
+      const feedbackSpan = document.createElement('span');
+      feedbackSpan.className = 'feedback-message';
+      
+      const icon = document.createElement('svg');
+      icon.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      icon.setAttribute('class', isCorrect ? 'h-6 w-6 checkmark' : 'h-6 w-6 x-mark');
+      icon.setAttribute('fill', 'none');
+      icon.setAttribute('viewBox', '0 0 24 24');
+      icon.setAttribute('stroke', 'currentColor');
+      
+      const path = document.createElement('path');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('stroke-linejoin', 'round');
+      path.setAttribute('stroke-width', '2');
+      
+      if (isCorrect) {
+        path.setAttribute('d', 'M5 13l4 4L19 7'); // Checkmark path
+      } else {
+        path.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // X mark path
+      }
+      
+      icon.appendChild(path);
+      feedbackSpan.appendChild(icon);
+      
+      button.appendChild(letterSpan);
+      button.appendChild(textSpan);
+      button.appendChild(feedbackSpan);
+      
+      return button;
+    }
+    
+    // Function to load the question and options
+    function loadQuestion() {
+      // Set question text and image
+      document.getElementById('question-text').textContent = questionText;
+      document.getElementById('question-image').src = questionImageUrl;
+      
+      // Create options array with correct and incorrect answers
+      const options = [
+        { text: correctAnswer, isCorrect: true },
+        { text: incorrectAnswer1, isCorrect: false },
+        { text: incorrectAnswer2, isCorrect: false },
+        { text: incorrectAnswer3, isCorrect: false }
+      ];
+      
+      // Shuffle the options to randomize their order
+      const shuffledOptions = shuffleArray(options);
+      
+      // Clear existing options
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+      
+      // Add the options to the container in the randomized order
+      const letters = ['A', 'B', 'C', 'D'];
+      shuffledOptions.forEach((option, index) => {
+        const button = createOptionButton(letters[index], option.text, option.isCorrect);
+        optionsContainer.appendChild(button);
+      });
+      
+      // Log the correct answer position (for debugging)
+      const correctIndex = shuffledOptions.findIndex(option => option.isCorrect);
+      console.log(`Correct answer is at position ${letters[correctIndex]}`);
+    }
+    
+    // Function to select an answer
+    function selectAnswer(element) {
+      // Disable all options to prevent multiple selections
+      const options = document.querySelectorAll('.option-btn');
+      options.forEach(option => {
+        option.classList.add('disabled');
+      });
+      
+      // Check if the selected answer is correct
+      const isCorrect = element.getAttribute('data-correct') === 'true';
+      
+      // Show feedback on the selected option
+      if (isCorrect) {
+        // Correct answer - show in green
+        element.classList.add('correct');
+        element.classList.add('pulse-green');
+      } else {
+        // Incorrect answer - show in neutral gray
+        element.classList.add('neutral');
+        element.classList.add('pulse-gray');
+        
+        // Also highlight the correct answer in green
+        const correctOption = document.querySelector('.option-btn[data-correct="true"]');
+        correctOption.classList.add('correct');
+      }
+      
+      // Show the feedback icon
+      const feedbackMessage = element.querySelector('.feedback-message');
+      feedbackMessage.classList.add('visible');
+      
+      // If the answer was correct, show the checkmark in the correct option
+      if (isCorrect) {
+        const correctFeedback = element.querySelector('.feedback-message');
+        correctFeedback.classList.add('visible');
+      } else {
+        // If incorrect, show the X mark in the selected option and checkmark in the correct option
+        const correctOption = document.querySelector('.option-btn[data-correct="true"]');
+        const correctFeedback = correctOption.querySelector('.feedback-message');
+        correctFeedback.classList.add('visible');
+      }
+      
+      // Show the next question button
+      setTimeout(() => {
+        document.getElementById('next-question-btn').classList.add('visible');
+      }, 1000);
+    }
+    
+    // Function to load a new question
+    function loadNewQuestion() {
+      // Reset all options
+      const options = document.querySelectorAll('.option-btn');
+      options.forEach(option => {
+        option.classList.remove('correct', 'neutral', 'pulse-green', 'pulse-gray', 'disabled');
+        const feedback = option.querySelector('.feedback-message');
+        feedback.classList.remove('visible');
+      });
+      
+      // Hide the next question button
+      document.getElementById('next-question-btn').classList.remove('visible');
+      
+      // Update question variables (in a real app, you'd fetch these from a database or API)
+      questionImageUrl = 'https://picsum.photos/id/' + Math.floor(Math.random() * 1000) + '/800/400';
+      
+      // You could update these variables with new content
+      correctAnswer = "{{opt1}}";
+      incorrectAnswer1 = "{{opt2}}";
+      incorrectAnswer2 = "{{opt3}}";
+      incorrectAnswer3 = "{{opt4}}";
+      
+      // Load the new question with randomized options
+      setTimeout(() => {
+        loadQuestion();
+      }, 300);
+    }
+    
+    // Function to demonstrate the randomization
+    function demonstrateRandomization() {
+      console.log("Demonstrating randomization of options...");
+      
+      // Create a test array
+      const testOptions = [
+        { text: "Option 1", isCorrect: true },
+        { text: "Option 2", isCorrect: false },
+        { text: "Option 3", isCorrect: false },
+        { text: "Option 4", isCorrect: false }
+      ];
+      
+      // Show original order
+      console.log("Original order:", testOptions.map(o => o.text));
+      
+      // Show 3 different shuffled orders
+      for (let i = 0; i < 3; i++) {
+        const shuffled = shuffleArray(testOptions);
+        console.log(`Shuffled order ${i+1}:`, shuffled.map(o => o.text));
+        console.log(`Correct answer position ${i+1}:`, shuffled.findIndex(o => o.isCorrect));
+      }
+    }
+    
+    // Initialize the quiz when the page loads
+    window.onload = function() {
+      // Demonstrate randomization in console (for debugging)
+      demonstrateRandomization();
+      
+      // Load the first question with randomized options
+      loadQuestion();
+    };
+  </script>
+</body>
+</html>
