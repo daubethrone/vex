@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vex | {{country}}</title>
+  <title>Vex</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -45,44 +45,248 @@
     .btn-light-purple:hover {
       background-color: #7B1FA2 !important; /* Slightly darker on hover */
     }
-  </style>
 
+    .sidebar {
+      background-color: #EFE1DB; /* Updated to the specified color */
+      transition: all 0.3s ease;
+      position: fixed;
+      left: -240px; /* Start hidden */
+      top: 0;
+      height: 100vh;
+      width: 240px;
+      z-index: 10;
+      border-right: 1px solid #e9ecef;
+    }
+
+    .sidebar-expanded {
+      transform: translateX(240px);
+    }
+
+    .main-content {
+      transition: all 0.3s ease;
+      margin-left: 0; /* Start with full width */
+      width: 100%;
+    }
+
+    .main-content-shifted {
+      margin-left: 240px;
+    }
+
+    .sidebar-toggle {
+      position: fixed;
+      left: 10px;
+      top: 10px;
+      z-index: 20;
+      transition: all 0.3s ease;
+      background-color: transparent; /* Transparent background */
+      color: #333; /* Darker text for visibility */
+      padding: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-toggle-shifted {
+      left: 250px;
+    }
+
+    /* Skyblog mode styles */
+    .skyblog-mode {
+      background: linear-gradient(to bottom, #ff66cc, #ff99cc);
+      font-family: 'Comic Sans MS', cursive;
+    }
+    
+    .skyblog-mode .card {
+      background-color: #ffccff;
+      border: 3px dashed #ff66cc;
+    }
+    
+    .skyblog-mode h1 {
+      color: #ff0099;
+      text-shadow: 2px 2px 4px #ffffff;
+    }
+
+    /* Animated underline effect for sidebar menu items */
+    .menu-item {
+      position: relative;
+      display: inline-block;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+    }
+
+    .menu-item::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #8A2BE2; /* Purple underline */
+      transition: width 0.3s ease;
+      transform-origin: left;
+    }
+
+    .menu-item:hover::after {
+      width: 100%;
+      animation: underlineExpand 0.3s ease forwards;
+    }
+
+    @keyframes underlineExpand {
+      0% {
+        width: 0;
+        opacity: 0.7;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    /* Hover effect for menu items */
+    .sidebar .menu li button:hover,
+    .sidebar .menu li a:hover {
+      color: #8A2BE2; /* Change text color to purple on hover */
+      background-color: transparent; /* Remove default hover background */
+    }
+  </style>
+  <script>
+    // Set initial colors when page loads
+    window.onload = function() {
+      // Format and display current date
+      const today = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', options);
+    };
+
+    // Toggle sidebar function
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('main-content');
+      const toggleBtn = document.getElementById('sidebar-toggle');
+      
+      sidebar.classList.toggle('sidebar-expanded');
+      mainContent.classList.toggle('main-content-shifted');
+      toggleBtn.classList.toggle('sidebar-toggle-shifted');
+      
+      // Update toggle button icon
+      if (sidebar.classList.contains('sidebar-expanded')) {
+        toggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" /></svg>';
+      } else {
+        toggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>';
+      }
+    }
+
+    // Show About modal
+    function showAboutModal() {
+      document.getElementById('about-modal').showModal();
+    }
+  </script>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-base-200 relative">
-  <div class="text-center px-4">
-    <div class="mb-8">
-      <img 
-        src="{{flag}}" 
-        alt="Flag" 
-        class="floating-flag mx-auto w-48 h-auto rounded-lg shadow-lg"
-      >
+<body class="min-h-screen flex bg-base-200 relative">
+  <!-- Sidebar Toggle Button - icon only, no circle or border -->
+  <button 
+    id="sidebar-toggle" 
+    onclick="toggleSidebar()" 
+    class="sidebar-toggle"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+    </svg>
+  </button>
+
+  <!-- Sidebar (hidden by default) with no title and no icons -->
+  <div id="sidebar" class="sidebar">
+    <!-- Empty header with just padding for spacing - removed border-b -->
+    <div class="p-4"></div>
+    
+    <div class="p-4">
+      <ul class="menu menu-md">
+        <li>
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="py-2 text-[#333] hover:bg-transparent">
+            <span class="menu-item">My Flags</span>
+          </a>
+        </li>
+        <li>
+          <button onclick="showAboutModal()" class="py-2 text-[#333] hover:bg-transparent">
+            <span class="menu-item">About</span>
+          </button>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="py-2 text-[#333] hover:bg-transparent">
+            <span class="menu-item">Quiz</span>
+          </a>
+        </li>
+        <li>
+          <a href="/skyblog" target="_blank" class="py-2 text-[#333] hover:bg-transparent">
+            <span class="menu-item">Skyblog UI Mode</span>
+          </a>
+        </li>
+      </ul>
     </div>
     
-    <!-- Lighter purple title -->
-    <h1 class="text-4xl font-bold mb-2 light-purple">{{country}}</h1>
-    
-    <!-- Anthracite date display -->
-    <p class="text-sm mb-4 italic font-medium anthracite">Used since {{date}}</p>
-    
-    <!-- Black text description -->
-    <p class="text-lg max-w-md mx-auto text-black">
-     {{summary}}
-    </p>
+    <!-- Removed border-t from the bottom copyright section -->
+    <div class="absolute bottom-0 w-full p-4">
+      <p class="text-xs text-center text-[#333]/70">v0.1</p>
+    </div>
   </div>
 
-  <!-- Lighter purple button with white icon -->
-  <div class="fixed bottom-6 right-6">
-    <a 
-      href="{{wikipedia}}" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      class="btn btn-circle shadow-lg btn-light-purple" 
-      title="More Info on Wikipedia"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    </a>
+  <!-- Main Content (full width by default) -->
+  <div id="main-content" class="main-content flex items-center justify-center min-h-screen">
+    <div class="text-center px-4">
+      <div class="mb-8">
+        <img 
+          src={{flag}} 
+          alt="{{country}} flag" 
+          class="floating-flag mx-auto w-48 h-auto rounded-lg"
+          onclick="window.location.reload()"
+        >
+      </div>
+      
+      <!-- Lighter purple title -->
+      <h1 class="text-4xl font-bold mb-2 light-purple">{{country}}</h1>
+      
+      <!-- Anthracite date display -->
+      <p class="text-sm mb-4 italic font-medium anthracite">First introduced : {{date}}</p>
+      
+      <!-- Black text description -->
+      <p class="text-lg max-w-md mx-auto text-black">
+        {{summary}}
+      </p>
+    </div>
+
+    <!-- Lighter purple button with white icon -->
+    <div class="fixed bottom-6 right-6">
+      <a 
+        href={{wikipedia}} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="btn btn-circle btn-light-purple" 
+        title="More Info"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </a>
+    </div>
   </div>
+
+  <!-- About Modal -->
+  <dialog id="about-modal" class="modal">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg light-purple">About Vex</h3>
+      <p class="py-4">
+        
+      </p>
+      <p class="py-2">
+        I made this project as I was learning to use the Flask framework for Python. The HTML/CSS part is generated using the awesome https://www.tailwindai.dev/ tool, which I recommend you check out. All of the data shown here comes from Wikipedia (you can access the related page by clicking on the "!" in the bottom right corner of the page when looking at a flag.)
+      </p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
 </body>
 </html>
