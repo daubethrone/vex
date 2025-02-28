@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Question</title>
+  <title>Vex | Quizz</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -55,8 +55,8 @@
     .option-btn {
       transition: all 0.2s ease;
       border: 2px solid transparent;
-      text-align: left;
-      justify-content: flex-start;
+      text-align: center;
+      justify-content: center;
       height: auto;
       min-height: 3rem;
       padding: 0.75rem 1rem;
@@ -108,32 +108,15 @@
       height: 100%;
       object-fit: cover;
     }
-
-    .option-letter {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background-color: rgba(138, 43, 226, 0.2);
-      color: #8A2BE2;
-      font-weight: bold;
-      margin-right: 12px;
-      flex-shrink: 0;
-    }
-
-    .option-btn.selected .option-letter,
-    .option-btn.correct .option-letter,
-    .option-btn.incorrect .option-letter,
-    .option-btn.neutral .option-letter {
-      background-color: rgba(255, 255, 255, 0.3);
-      color: white;
-    }
     
     /* Animation for options */
     .options-container {
       transition: all 0.5s ease;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      width: 100%;
+      margin-bottom: 4rem; /* Add space for the next button */
     }
     
     .feedback-message {
@@ -189,18 +172,26 @@
     }
     
     /* Next question button */
+    .next-question-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+    }
+    
     .next-question-btn {
-      margin-top: 1.5rem;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%) scale(0.9);
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s ease;
-      display: none;
+      transition: all 0.3s ease;
+      visibility: hidden;
+      z-index: 10;
     }
     
     .next-question-btn.visible {
       opacity: 1;
-      transform: translateY(0);
-      display: block;
+      transform: translateX(-50%) translateY(-100%) scale(1);
+      visibility: visible;
     }
     
     /* Checkmark and X icons */
@@ -218,6 +209,13 @@
     .option-btn.disabled {
       pointer-events: none;
     }
+
+    /* Media query for mobile devices */
+    @media (max-width: 640px) {
+      .options-container {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen flex bg-base-200 relative">
@@ -230,33 +228,36 @@
 
   <!-- Main Content -->
   <div class="w-full flex items-center justify-center min-h-screen">
-    <div class="w-full max-w-2xl px-4 py-8">
+    <div class="w-full max-w-2xl px-4 py-8 flex flex-col items-center">
       <!-- Title -->
-      <h1 class="text-4xl font-bold mb-6 light-purple text-center">Quiz Question</h1>
+      <h1 class="text-4xl font-bold mb-6 light-purple text-center"></h1>
       
       <!-- Card example -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
+      <div class="w-full flex justify-center">
+        <div class="w-full flex flex-col items-center">
           <!-- Question Image -->
-          <div class="question-image">
+          <div class="question-image mx-auto w-64 h-auto rounded-lg">
             <img id="question-image" src="https://picsum.photos/id/237/800/400" alt="Question Image">
           </div>
           
           <h2 id="question-text" class="text-xl font-semibold mb-4 text-center">Select the correct answer:</h2>
           
-          <!-- 4 Propositions -->
-          <div id="options-container" class="options-container flex flex-col gap-3 mb-6">
-            <!-- Options will be populated by JavaScript -->
-          </div>
-          
-          <!-- Next Question Button (initially hidden) -->
-          <div class="flex justify-center">
-            <button id="next-question-btn" class="next-question-btn btn btn-light-purple" onclick="loadNewQuestion()">
-              One more !
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+          <!-- Options Container with Relative Positioning -->
+          <div class="relative w-full">
+            <!-- 4 Propositions in 2 columns -->
+            <div id="options-container" class="options-container">
+              <!-- Options will be populated by JavaScript -->
+            </div>
+            
+            <!-- Next Question Button Container -->
+            <div class="next-question-container">
+              <button id="next-question-btn" class="next-question-btn btn btn-light-purple" onclick="location.reload()">
+                Next Question
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -285,15 +286,11 @@
     }
     
     // Function to create an option button
-    function createOptionButton(letter, text, isCorrect) {
+    function createOptionButton(text, isCorrect) {
       const button = document.createElement('button');
-      button.className = 'option-btn btn btn-outline w-full';
+      button.className = 'option-btn btn btn-outline';
       button.setAttribute('data-correct', isCorrect);
       button.onclick = function() { selectAnswer(this); };
-      
-      const letterSpan = document.createElement('span');
-      letterSpan.className = 'option-letter';
-      letterSpan.textContent = letter;
       
       const textSpan = document.createElement('span');
       textSpan.textContent = text;
@@ -322,7 +319,6 @@
       icon.appendChild(path);
       feedbackSpan.appendChild(icon);
       
-      button.appendChild(letterSpan);
       button.appendChild(textSpan);
       button.appendChild(feedbackSpan);
       
@@ -351,15 +347,10 @@
       optionsContainer.innerHTML = '';
       
       // Add the options to the container in the randomized order
-      const letters = ['A', 'B', 'C', 'D'];
-      shuffledOptions.forEach((option, index) => {
-        const button = createOptionButton(letters[index], option.text, option.isCorrect);
+      shuffledOptions.forEach((option) => {
+        const button = createOptionButton(option.text, option.isCorrect);
         optionsContainer.appendChild(button);
       });
-      
-      // Log the correct answer position (for debugging)
-      const correctIndex = shuffledOptions.findIndex(option => option.isCorrect);
-      console.log(`Correct answer is at position ${letters[correctIndex]}`);
     }
     
     // Function to select an answer
@@ -406,11 +397,14 @@
       // Show the next question button
       setTimeout(() => {
         document.getElementById('next-question-btn').classList.add('visible');
-      }, 1000);
+      }, 500);
     }
     
     // Function to load a new question
     function loadNewQuestion() {
+      // Hide the next question button first
+      document.getElementById('next-question-btn').classList.remove('visible');
+      
       // Reset all options
       const options = document.querySelectorAll('.option-btn');
       options.forEach(option => {
@@ -418,9 +412,6 @@
         const feedback = option.querySelector('.feedback-message');
         feedback.classList.remove('visible');
       });
-      
-      // Hide the next question button
-      document.getElementById('next-question-btn').classList.remove('visible');
       
       // Update question variables (in a real app, you'd fetch these from a database or API)
       questionImageUrl = 'https://picsum.photos/id/' + Math.floor(Math.random() * 1000) + '/800/400';
