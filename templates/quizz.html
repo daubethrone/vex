@@ -237,7 +237,7 @@
         <div class="w-full flex flex-col items-center">
           <!-- Question Image -->
           <div class="question-image mx-auto w-64 h-auto rounded-lg">
-            <img id="question-image" src="https://picsum.photos/id/237/800/400" alt="Question Image">
+            <img id="question-image" alt="Question Image">
           </div>
           
           <h2 id="question-text" class="text-xl font-semibold mb-4 text-center">Select the correct answer:</h2>
@@ -412,9 +412,6 @@
         const feedback = option.querySelector('.feedback-message');
         feedback.classList.remove('visible');
       });
-      
-      // Update question variables (in a real app, you'd fetch these from a database or API)
-      questionImageUrl = 'https://picsum.photos/id/' + Math.floor(Math.random() * 1000) + '/800/400';
       
       // You could update these variables with new content
       correctAnswer = "{{opt1}}";
